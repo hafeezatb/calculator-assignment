@@ -23,13 +23,15 @@ input.addEventListener("change", function(e) {
     const this_input = e.target;
     const qty = parseFloat(e.target.value);
     const this_row = this_input.closest(".row");
-        const amazon = this_row.querySelector(".amazon");
-            const amazon_span = amazon.querySelector("span");
-                const amazon_price = parseFloat(amazon.dataset.price);
-                    const amazon_cost = qty * amazon_price;
+
+    //\\
+        const streetvendor = this_row.querySelector(".streetvendor");
+            const streetvendor_span = streetvendor.querySelector("span");
+                const streetvendor_price = parseFloat(streetvendor.dataset.price);
+                    const streetvendor_cost = qty * streetvendor_price;
                     // update the span within the amazon div with the value of amazon_cost
-                    amazon_span.innerHTML = round_number(amazon_cost);
-                    amazon.classList.add("active");
+                    streetvendor_span.innerHTML = round_number(streetvendor_cost);
+                    streetvendor.classList.add("active");
 
         const freshdirect = this_row.querySelector(".freshdirect");
             const freshdirect_span = freshdirect.querySelector("span");
@@ -38,27 +40,16 @@ input.addEventListener("change", function(e) {
                     freshdirect_span.innerHTML = round_number(freshdirect_cost);
                     freshdirect.classList.add("active");
 
-        const peapod = this_row.querySelector(".peapod");
-            const peapod_span = peapod.querySelector("span");
-                const peapod_price = parseFloat(peapod.dataset.price);
-                    const peapod_cost = qty * peapod_price
-                    peapod_span.innerHTML = round_number(peapod_cost);
-                    peapod.classList.add("active");
-
         let cheap = false;
 
-        if(amazon_cost < freshdirect_cost && amazon_cost < peapod_cost) {
-            cheap = amazon;
-        }
-
-        if(freshdirect_cost < amazon_cost && freshdirect_cost < peapod_cost) {
+        if(freshdirect_cost < streetvendor_cost) {
             cheap = freshdirect;
         }
 
-        if(peapod_cost < amazon_cost && peapod_cost < freshdirect_cost) {
-            cheap = peapod;
+        if(streetvendor_cost < freshdirect_cost) {
+            cheap = streetvendor;
         }
-        
+
         // throw a cheap class on whichever of the retailers ends up being the value of 'cheap'
         const current_cheap = this_row.querySelector(".cheap")
 
@@ -72,8 +63,7 @@ input.addEventListener("change", function(e) {
         }
     // grand total
     
-    let amazon_total = 0;
-    let peapod_total = 0;
+    let streetvendor_total = 0;
     let freshdirect_total = 0;
 
     const rows = document.querySelectorAll(".row:not(.total)")
@@ -83,39 +73,29 @@ input.addEventListener("change", function(e) {
             return false
         }
         qty = parseFloat(qty)
-        const amazon = this_row.querySelector(".amazon");
-        const amazon_price = parseFloat(amazon.dataset.price);
-                const amazon_cost = qty * amazon_price;
+        const streetvendor = this_row.querySelector(".streetvendor");
+        const streetvendor_price = parseFloat(streetvendor.dataset.price);
+                const streetvendor_cost = qty * streetvendor_price;
 
         const freshdirect = this_row.querySelector(".freshdirect");
         const freshdirect_price = parseFloat(freshdirect.dataset.price);
                 const freshdirect_cost = qty * freshdirect_price
-
-        const peapod = this_row.querySelector(".peapod");
-        const peapod_price = parseFloat(peapod.dataset.price);
-                const peapod_cost = qty * peapod_price 
                 
-        amazon_total = amazon_total + amazon_cost
+        streetvendor_total = streetvendor_total + streetvendor_cost
         freshdirect_total = freshdirect_total + freshdirect_cost
-        peapod_total = peapod_total + peapod_cost
-
-       
 
     })
 
-    const amazon_total_span = document.querySelector(".row.total .amazon span")
+    const streetvendor_total_span = document.querySelector(".row.total .streetvendor span")
     const freshdirect_total_span = document.querySelector(".row.total .freshdirect span")
-    const peapod_total_span = document.querySelector(".row.total .peapod span")
 
 
-    amazon_total_span.innerHTML = round_number(amazon_total);
+    streetvendor_total_span.innerHTML = round_number(streetvendor_total);
     freshdirect_total_span.innerHTML = round_number(freshdirect_total);
-    peapod_total_span.innerHTML = round_number(peapod_total);
 
     document.querySelector(".row.total").classList.add("active")
-    document.querySelector(".row.total .amazon").classList.add("active");
+    document.querySelector(".row.total .streetvendor").classList.add("active");
     document.querySelector(".row.total .freshdirect").classList.add("active");
-    document.querySelector(".row.total .peapod").classList.add("active");
     });
 
 });

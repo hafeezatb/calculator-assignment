@@ -32,8 +32,8 @@ body,
 html {
     /* Sets default font-size to 16px, ensuring 1em = 16px; */
     font-size: 16px;
+    background-color:#dadee6;
 }
-
 
 /** RESPONSIVE IMAGES */
 
@@ -46,9 +46,15 @@ img {
 }
 
 p {
-    line-height: 1.2em;
+    line-height: 1.5em;
+    font-size: 16px;
 }
 
+h3,
+h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
 
 /** Caption styles */
 
@@ -66,6 +72,14 @@ figcaption {
 /** Container styles to keep content from becoming too wide or coming too close to
 * mobile edge */
 
+.container2 {
+    width: 100%;
+    max-width: 800px;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: #f7f7f7;
+}
+
 .container {
     width: 100%;
     max-width: 800px;
@@ -77,8 +91,9 @@ figcaption {
 /** Images are allowed to be a little wider when broken out into their own container */
 
 .container.image {
-    max-width: 1200px;
+    max-width: 1000px;
     padding: 0;
+    align-content: center;
 }
 
 .container.image .caption,
@@ -105,6 +120,7 @@ figcaption {
 
 .qty_container {
     display: flex;
+    background-color: #8e8a8a;
     /* Make the qty_container a flex box so we can juxtapose the qty and unit */
 }
 
@@ -145,17 +161,15 @@ figcaption {
 * We also apply margins to them to air them out
 */
 
-.peapod,
-.freshdirect,
-.amazon {
+.streetvendor,
+.freshdirect{
     margin: 5px 0;
     display: none;
 
 }
 
-.peapod.active,
-.freshdirect.active,
-.amazon.active {
+.streetvendor.active,
+.freshdirect.active {
     margin: 5px 0;
     display: block;
     
@@ -163,7 +177,7 @@ figcaption {
 
 .cheap{
     font-weight: bold;
-    font-size: 1.8em;
+    font-size: 1.2em;
     color: rgb(13, 92, 13)
 }
 
@@ -187,7 +201,7 @@ figcaption {
 
 .calculator .row {
     margin-bottom: 15px;
-    flex-basis: 30%;
+    flex-basis: calc(50% - 10px);
 }
 
 
